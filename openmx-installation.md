@@ -62,6 +62,7 @@ update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9
 echo 'export CXX=/usr/bin/gcc-9' >> ~/.bashrc
 ```
 And then relaunch your terminal and try to make again.
+
 6. When the installation is completed successfully, the executable file: openmx will be generated in "openmx3.9/work"
 7. Test Run using following command inside **openmx3.9/work** folder location
 ```bash
