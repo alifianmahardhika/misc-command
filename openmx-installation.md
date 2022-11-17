@@ -58,7 +58,9 @@ make all && make install
 ```
 If make process is failed, try to change the gcc compiler to use older version for example gcc-9 in this case try to execute following commands:
 ```bash
-update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9
+sudo apt install gcc-9 g++-9
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 50
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 50
 echo 'export CXX=/usr/bin/gcc-9' >> ~/.bashrc
 ```
 And then relaunch your terminal and try to make again.
