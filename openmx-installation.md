@@ -56,6 +56,12 @@ LIB= -L${MKLROOT}/lib/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_intel_
 ```bash
 make all && make install
 ```
+If make process is failed, try to change the gcc compiler to use older version for example gcc-9 in this case try to execute following commands:
+```bash
+update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9
+echo 'export CXX=/usr/bin/gcc-9' >> ~/.bashrc
+```
+And then relaunch your terminal and try to make again.
 6. When the installation is completed successfully, the executable file: openmx will be generated in "openmx3.9/work"
 7. Test Run using following command inside **openmx3.9/work** folder location
 ```bash
