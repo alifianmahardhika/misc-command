@@ -1,4 +1,4 @@
-## Installation of openmx (Linux)
+## Installation of OpenMX (Linux)
 ### Preparation
 1. Update and upgrade apt
 ```bash
@@ -31,4 +31,33 @@ source /opt/intel/oneapi/setvars.sh
 icc --version
 ifort --version
 mpitun --version
+```
+
+## Installing OpenMX
+Do these steps only after confirming above preparation steps is completely finished.
+1. Download OpenMX 3.9 [here](https://www.openmx-square.org/openmx3.9.tar.gz)
+2. Download the latest patch [here](https://www.openmx-square.org/bugfixed/21Oct17/patch3.9.9.tar.gz)
+3. Go to OpenMX source file location and execute following commands
+```bash
+tar xvf openmx3.9.tar.gz
+cp ./patch3.9.9.tar.gz openmx3.9/source
+cd openmx3.9/source
+tar xvf patch3.9.9.tar.gz
+mv kpoint.in ../work/
+```
+4.  In the openmx3.9/source makefile, specify the following using an editor
+```
+MKLROOT = /opt/intel/oneapi/mkl/2021.3.0/
+CC = mpiicc -O3 -xHOST -ip -no-prec-div -qopenmp -I${MKLROOT}/include -I${MKLROOT}/include/fftw
+FC = mpiifort -O3 -xHOST -ip -no-prec-div -qopenmp
+LIB= -L${MKLROOT}/lib/intel64 -lmkl_scalapack_lp64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -lifcore -lmkl_blacs_intelmpi_lp64 -liomp5 -lpthread -lm -ldl
+```
+5. After that install OpenMX using these command
+```bash
+make all && make install
+```
+6. When the installation is completed successfully, the executable file: openmx will be generated in "openmx3.9/work"
+7. Test Run using following command inside **openmx3.9/work** folder location
+```bash
+mpirun -np 4 ./openmx -runtest -nt 1
 ```
